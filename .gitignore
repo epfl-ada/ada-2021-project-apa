@@ -11,3 +11,5 @@ politicians_github.csv
 
 data/*.parquet
 data/*.json.bz2
+data/pkl
+data/*.tar.gz
