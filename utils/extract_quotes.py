@@ -4,8 +4,11 @@ import argparse
 
 from tqdm import tqdm
 import pandas as pd
-from multiprocesspandas import applyparallel
 import numpy as np
+
+from pandarallel import pandarallel
+
+pandarallel.initialize(progress_bar=True)
 
 # tqdm for pandas
 tqdm.pandas()
