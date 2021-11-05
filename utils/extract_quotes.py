@@ -32,13 +32,14 @@ def extract_subset(orig_df: pd.DataFrame, multiproc=False) -> pd.DataFrame:
 
     It returns the number of extracted quotes and the extracted dataframe.
     """
+
     if multiproc:
-        orig_df["subset"] = orig_df["speaker"].apply_parallel(
-            lambda x: pd.Series(x).isin(congress_members)
+        orig_df["subset"] = orig_df["speaker"].parallel_apply(
+            lambda x: pd.Series(x.lower()).isin(congress_members)
         )
     else:
         orig_df["subset"] = orig_df["speaker"].progress_apply(
-            lambda x: pd.Series(x).isin(congress_members)
+            lambda x: pd.Series(x.lower()).isin(congress_members)
         )
 
     return orig_df["subset"].sum(), orig_df[orig_df["subset"] == True]
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 
     # Extract the quotes of interest of each chunk
     all_extracted = []
-    for file in files:
+    for i, file in enumerate(files):
         try:
             df = pd.read_pickle(os.path.join(PKL_PATH, file))
         except FileNotFoundError:
