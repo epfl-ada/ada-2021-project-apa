@@ -28,7 +28,9 @@ DATA_PATH = "data"
 PKL_PATH = os.path.join(DATA_PATH, "pkl")
 
 
-def load_df(file_name: str, mode: str = "pandas", save: bool = True) -> pd.DataFrame:
+def load_df(
+    file_name: str, mode: str = "pandas", save: bool = True, chunksize: int = 1_000_000
+) -> pd.DataFrame:
     """
     Load a dataset in DataFrame from a .json.bz2 archive.
 
@@ -56,12 +58,16 @@ def load_df(file_name: str, mode: str = "pandas", save: bool = True) -> pd.DataF
                 ]
             )
     else:
-        df = pd.read_json(file_path)
+        df_lst = []
+        with pd.read_json(file_path, lines=True, chunksize=chunksize) as df_reader:
+            for i, chunk in enumerate(df_reader):
+                df_lst.append(chunk)
 
-    if save:
-        if !os.path.exists(pkl_path):
-            file_name = file_name.strip(".json.bz2")
-            df.to_pickle(os.path.join(PKL_PATH, pkl_path))
+        df = pd.concat(df_lst)
+
+    if save and not os.path.exists(pkl_path):
+        file_name = file_name.strip(".json.bz2")
+        df.to_pickle(os.path.join(PKL_PATH, pkl_path))
 
     return df
 
