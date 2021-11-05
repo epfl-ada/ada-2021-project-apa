@@ -1,7 +1,7 @@
 """
-Very small utility script to convert a .json.bz2 archive into a .pkl file.
+Utility script to convert a .json.bz2 archive into multiple .pkl files.
 
-usage: load_df.py [-h] [-m M] file_name
+usage: load_df.py [-h] [-m M] [-c C] file_name
 
 Load .json.bz2 archive as .pkl.
 
@@ -10,9 +10,10 @@ positional arguments:
 
 optional arguments:
   -h, --help  show this help message and exit
-  -m M        Choose mode. Either "pandas" or "bz2".
+  -m M        Choose mode. Either "pandas" or "bz2"
+  -c C        Chunksize
 
-This is useful if you are memory-limited and need to spear every bit of RAM you can. This script allows, for example, not to have VScode running.
+This is useful if you are memory-limited and need to spear every bit of RAM you can. This script allows, for example, not to have your IDE running.
 """
 
 import os
@@ -45,7 +46,6 @@ def load_df(
     """
 
     file_path = os.path.join(DATA_PATH, file_name)
-    pkl_path = os.path.join(PKL_PATH, f"{file_name}.pkl")
 
     if mode == "bz2":
         keys = ["quoteID", "quotation", "speaker", "date", "numOccurrences", "phase"]
@@ -58,12 +58,15 @@ def load_df(
                 ]
             )
     else:
-        df_lst = []
+        if not save:
+            print("Please enable save option.")
+            return
+
         with pd.read_json(file_path, lines=True, chunksize=chunksize) as df_reader:
             for i, chunk in enumerate(df_reader):
-                df_lst.append(chunk)
-
-        df = pd.concat(df_lst)
+                file_name = file_name.strip(".json.bz2")
+                pkl_path = os.path.join(PKL_PATH, f"{file_name}-{i:03d}.pkl")
+                chunk.to_pickle(pkl_path)
 
     if save and not os.path.exists(pkl_path):
         file_name = file_name.strip(".json.bz2")
@@ -81,13 +84,14 @@ parser.add_argument(
 parser.add_argument(
     "-m", default="pandas", help='Loading mode. Either "pandas" or "bz2".'
 )
+parser.add_argument("-c", default=500_000, type=int, help="Chunksize.")
 args = parser.parse_args()
 
 if __name__ == "__main__":
     t0 = time.time()
-    print("Converting", args.file_name)
+    print("Converting", args.file_name, "with chunksize", args.c)
 
-    df = load_df(args.file_name, mode=args.m)
+    df = load_df(args.file_name, mode=args.m, chunksize=args.c)
 
     elapsed = (time.time() - t0) / 60
     print(f"Done in {elapsed:.2f} min. {len(df)} line converted.")

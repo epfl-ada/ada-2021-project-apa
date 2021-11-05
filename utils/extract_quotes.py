@@ -1,7 +1,6 @@
 import os
-import json
 import time
-import bz2
+import argparse
 
 from tqdm import tqdm
 import pandas as pd
@@ -15,6 +14,16 @@ tqdm.pandas()
 DATA_PATH = "data"
 PKL_PATH = os.path.join(DATA_PATH, "pkl")
 RESOURCES_PATH = os.path.join(DATA_PATH, "resources")
+
+
+def get_pkl_year(year: int) -> list:
+    """
+    Returns a list of the pkl files present in `data/pkl/{year}`.
+    """
+
+    dirs = os.listdir(os.path.join(PKL_PATH, str(year)))
+
+    return [os.path.join(str(year), dir) for dir in dirs]
 
 
 def extract_subset(orig_df: pd.DataFrame, multiproc=False) -> pd.DataFrame:
@@ -35,7 +44,23 @@ def extract_subset(orig_df: pd.DataFrame, multiproc=False) -> pd.DataFrame:
     return orig_df["subset"].sum(), orig_df[orig_df["subset"] == True]
 
 
+parser = argparse.ArgumentParser(
+    description="Extract quotes from politicians from multiple pkl files"
+)
+parser.add_argument(
+    "year", type=int, help="Name of the year folder from which to extract the pkl files"
+)
+parser.add_argument(
+    "-m",
+    type=bool,
+    default=False,
+    help="Use multiprocessing. Set to False if it fails",
+)
+
+args = parser.parse_args()
+
 if __name__ == "__main__":
+    # Get politicians list
     politicians_filepath = os.path.join(RESOURCES_PATH, "congress_biolist.json")
     politicians_df = pd.read_json(politicians_filepath).drop("congresses", axis=1)
 
@@ -48,23 +73,27 @@ if __name__ == "__main__":
 
     # The datasets were already loaded from the json.bz2 format and converted to .pkl in `data/pkl`
 
-    # Get the names
-    quotes_datasets = [
-        os.path.join("data", "pkl", f"quotes-20{i:02d}.pkl") for i in range(8, 21)
-    ]
+    year = args.year
+    files = get_pkl_year(year)
 
-    # For each dataset, extract the quotes from congress members
-    # and save the extracted quotes as pkl for easier handling
-    for i, dataset in enumerate(quotes_datasets, start=1):
-        print(f"{i}/{len(quotes_datasets)} {dataset}:")
+    # Extract the quotes of interest of each chunk
+    all_extracted = []
+    for file in files:
         try:
-            complete_df = pd.read_pickle(os.path.join(DATA_PATH, dataset))
+            df = pd.read_pickle(os.path.join(PKL_PATH, file))
         except FileNotFoundError:
-            print(f"{dataset} not found, trying next file")
+            print(f"{file} not found, trying next file")
             continue
 
         t0 = time.time()
-        _, subset_df = extract_subset(complete_df)
-        subset_df.to_pickle(os.path.join("data", "pkl", f"extracted_{dataset}"))
+        _, subset_df = extract_subset(df, multiproc=args.m)
+        all_extracted.append(subset_df)
         elapsed = time.time() - t0
         print(f"Done in {elapsed:.2f}s")
+
+    # Merge them into a new df
+    df_extracted = pd.concat(all_extracted)
+
+    # Save the df as pkl
+    pkl_name = f"extracted-quotes-{year}.pkl"
+    df_extracted.to_pickle(os.path.join(PKL_PATH, pkl_name))
