@@ -1,14 +1,13 @@
 import os
 import time
 import argparse
+import multiprocessing
 
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
 
 from pandarallel import pandarallel
-
-pandarallel.initialize(progress_bar=True)
 
 # tqdm for pandas
 tqdm.pandas()
@@ -57,11 +56,22 @@ parser.add_argument(
 parser.add_argument(
     "-m",
     type=bool,
-    default=False,
+    default=True,
     help="Use multiprocessing. Set to False if it fails",
+)
+parser.add_argument(
+    "-w",
+    type=int,
+    default=None,
+    help="Nb of workers to use for multiprocessing. Defaults to max.",
 )
 
 args = parser.parse_args()
+
+if args.w is None:
+    args.w = multiprocessing.cpu_count()
+
+pandarallel.initialize(progress_bar=True, nb_workers=args.w)
 
 if __name__ == "__main__":
     # Get politicians list
@@ -82,7 +92,8 @@ if __name__ == "__main__":
 
     # Extract the quotes of interest of each chunk
     all_extracted = []
-    for i, file in enumerate(files):
+    for i, file in enumerate(files, start=1):
+        print(f"{i}/{len(files)} Extracting quotes from {file}")
         try:
             df = pd.read_pickle(os.path.join(PKL_PATH, file))
         except FileNotFoundError:
@@ -93,7 +104,7 @@ if __name__ == "__main__":
         _, subset_df = extract_subset(df, multiproc=args.m)
         all_extracted.append(subset_df)
         elapsed = time.time() - t0
-        print(f"Done in {elapsed:.2f}s")
+        print(f"\nDone in {elapsed:.2f}s")
 
     # Merge them into a new df
     df_extracted = pd.concat(all_extracted)
