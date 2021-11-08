@@ -75,7 +75,7 @@ pandarallel.initialize(progress_bar=True, nb_workers=args.w)
 
 if __name__ == "__main__":
     # Get politicians list
-    politicians_filepath = os.path.join(RESOURCES_PATH, "congress_biolist.json")
+    politicians_filepath = os.path.join(RESOURCES_PATH, "new_congress_biolist.json")
     politicians_df = pd.read_json(politicians_filepath).drop("congresses", axis=1)
 
     politicians_df["fullName"] = (
