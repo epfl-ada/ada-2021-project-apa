@@ -37,11 +37,11 @@ def extract_subset(orig_df: pd.DataFrame, multiproc=False) -> pd.DataFrame:
 
     if multiproc:
         orig_df["subset"] = orig_df["speaker"].parallel_apply(
-            lambda x: pd.Series(x.lower()).isin(congress_members)
+            lambda x: pd.Series(x.lower()).str.contains("|".join(congress_members))
         )
     else:
         orig_df["subset"] = orig_df["speaker"].progress_apply(
-            lambda x: pd.Series(x.lower()).isin(congress_members)
+            lambda x: pd.Series(x.lower()).str.contains("|".join(congress_members))
         )
 
     return orig_df["subset"].sum(), orig_df[orig_df["subset"] == True]
