@@ -13,5 +13,6 @@ data/*.parquet
 data/*.json.bz2
 data/pkl
 data/*.tar.gz
+data/csv/final_subset.csv
 
 .DS_Store
