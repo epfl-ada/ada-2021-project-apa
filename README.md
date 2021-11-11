@@ -26,13 +26,13 @@ We've extracted the members of the US congress from the Biographical Directory o
 As explained, we are interested in the political cleavage between Right and Left in the US, measured by their sentiment score. In order to do that, we decided to limit ourselves to the 2015 to 2020 timeframe. Below is a detailed explanation of the different methods and steps we take to analyze that.
 
 ### 1. Data extraction	
-_The relevant notebook for this part is called **data_extraction.ipynb**._
+_The relevant notebook for this part is called **data_extraction.ipynb**._  
 First of all, we need to have a dataset to work on. From the Quotebank 2015-2020 dataset, we need to extract the quotes expressed by US politicians. We decided to limit ourselves to the members of the US congress, to which we manually added Donald Trump (the President is not a congress member). Given the size of the data, each quotebank yearly dataset was split into chunks, on which we extracted data. 
 
 Once we had all quotes from congress members (and Donald Trump), we then extracted only the quotes that where mentioning any congress member of the other party. For example, we extracted the following quote from Trump (a republican) because he was mentioning Hillary Clinton (a democrat):
 > With Hillary Clinton, i said: 'be at my wedding, '
 
-The following figure illustrates the data pipeline:
+The following figure illustrates the data pipeline:  
 ![Data pipeline](figures/data_pipe.png)
 
 Remarks:
@@ -40,7 +40,7 @@ Remarks:
 - Some politicians appear numerous times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). For now, we decided to drop those "duplicates" and not retrieve their quotes. This could be changed in a future version of our work.
 
 ### 2. Political cleavage analysis
-_The relevant notebook for this part is called **sentiment_eda.ipynb**._
+_The relevant notebook for this part is called **sentiment_eda.ipynb**._  
 From the above final dataset, we want to analyze the political cleavage accross time. As previously said, we simply compute their sentiment score in order to do that. Currently, we are using NLTK's vader sentiment scorer [2]. This algorithm analyzes the words in a given sentence, and compares it against a dictionary of positive and negative words. It is quite advanced in the sense that it handles score boosting given numerous factors, for example punctuation (adding multiple exlamation marks) or using all caps. 
 
 Using the computed scores, we then analyze its evolution accross time for the two parties. For now, you can see some exploratory data analysis in the relevant notebook.
@@ -92,5 +92,5 @@ Task - Person responsible - Deadline (23:59 on the date)
 
 
 ## References
-[1] Wikipedia contributors. (2021, November 9). List of mass shootings in the United States. In Wikipedia, The Free Encyclopedia. Retrieved 10:17, November 11, 2021, from https://en.wikipedia.org/w/index.php?title=List_of_mass_shootings_in_the_United_States&oldid=1054289389
+[1] Wikipedia contributors. (2021, November 9). List of mass shootings in the United States. In Wikipedia, The Free Encyclopedia. Retrieved 10:17, November 11, 2021, from https://en.wikipedia.org/w/index.php?title=List_of_mass_shootings_in_the_United_States&oldid=1054289389  
 [2] https://www.nltk.org/_modules/nltk/sentiment/vader.html
