@@ -13,3 +13,5 @@ data/*.parquet
 data/*.json.bz2
 data/pkl
 data/*.tar.gz
+
+.DS_Store
