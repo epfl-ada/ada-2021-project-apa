@@ -17,5 +17,9 @@ data/csv/final_subset.csv
 
 old_code/data
 logistic_thinkers_EDA.ipynb
+logistic_thinkers_EDA.txt
 
 .DS_Store
+
+
+tempCodeRunnerFile.python
