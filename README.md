@@ -7,11 +7,11 @@ The political cleavage will be measured through a sentiment analysis over the qu
 
 ## Research Questions
 
-How did the political cleavage in the US evolve during the last 5 years ?
-Did some specific events (presidential elections, midterms, outbreak of the corona virus, etc.) have any impact on the cleavage ?
-Which politicians are the least aggressive and which are the most aggressive ?
+How did the political cleavage in the US evolve in recent years ?
+Did some specific events (major elections, COVID-19 pandemics, etc.) have any impact on the cleavage ?
+Which politicians are the least or the most aggressive ?
 Does the political party correlate with being more or less aggressive ?
-Can the time-series of data points from the sentiment analysis fit well to a function from which the trend and uncertainty can be described. 
+Can the cleavage be described well by a simple function from which the trend and uncertainty can be described. 
 
 Additional questions if time permits:
 What are the most used terms ?
@@ -20,6 +20,7 @@ How is the lexical richness and how does it develop over time ?
 ## Proposed additional datasets
 
 We've extracted the members of the US congress from the Biographical Directory of the United States Congress https://bioguide.congress.gov that have been active in last 14 years.
+We use the speaker_attribues.parquet data for getting aliases of the politicians.
 
 ## Methods
 
@@ -27,66 +28,63 @@ As explained, we are interested in the political cleavage between Right and Left
 
 ### 1. Data extraction	
 _The relevant notebook for this part is called **data_extraction.ipynb**._  
-First of all, we need to have a dataset to work on. From the Quotebank 2015-2020 dataset, we need to extract the quotes expressed by US politicians. We decided to limit ourselves to the members of the US congress, to which we manually added Donald Trump (the President is not a congress member). Given the size of the data, each quotebank yearly dataset was split into chunks, on which we extracted data. 
+We work on the Quotebank 2015-2020 dataset and need to extract the quotes expressed by US politicians. We decided to limit ourselves to members of the US congress and Donald Trump. Given the size of the data, the dataset was split into chunks from which we extract data. 
 
-Once we had all quotes from congress members (and Donald Trump), we then extracted only the quotes that where mentioning any congress member of the other party. For example, we extracted the following quote from Trump (a republican) because he was mentioning Hillary Clinton (a democrat):
+Once we had all relevant quotes, we extracted only the quotes that were mentioning any congress member of the other party. For example, we extracted the following quote from Trump (a republican) because he was mentioning Hillary Clinton (a democrat):
 > With Hillary Clinton, i said: 'be at my wedding, '
 
 The following figure illustrates the data pipeline:  
 ![Data pipeline](figures/data_pipe.png)
 
 Remarks:
-- For now, we decided to naively extract quotes, meaning that we simply detect when the speaker is the exact name (Name + Family Name) of a politician. For the next milestone, we want to implement a less-naive approach by also capturing aliases of politicians.
-- Some politicians appear numerous times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). For now, we decided to drop those "duplicates" and not retrieve their quotes. This could be changed in a future version of our work.
+- For now, we decided to naively extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician. For the next milestone, we want to implement a less-naive approach by also capturing aliases of politicians.
+- A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). For now, we decided to drop duplicated names and their quotes. This could be changed in the future.
 
 ### 2. Political cleavage analysis
 _The relevant notebook for this part is called **sentiment_eda.ipynb**._  
-From the above final dataset, we want to analyze the political cleavage accross time. As previously said, we simply compute their sentiment score in order to do that. Currently, we are using NLTK's vader sentiment scorer [2]. This algorithm analyzes the words in a given sentence, and compares it against a dictionary of positive and negative words. It is quite advanced in the sense that it handles score boosting given numerous factors, for example punctuation (adding multiple exlamation marks) or using all caps. 
+From the above dataset, we want to analyze the political cleavage accross time. As previously said, we simply compute their sentiment score using NLTK's vader sentiment scorer [2] to do that. This algorithm analyzes the words in a given sentence, and compares it against a dictionary of positive and negative words. It is quite advanced as it handles score boosting given numerous factors, for example punctuation (adding multiple exlamation marks) or using all caps. 
 
 Using the computed scores, we then analyze its evolution accross time for the two parties. For now, you can see some exploratory data analysis in the relevant notebook.
 
 Remarks:
-- Preliminary analyses show that most quotes are classified as "neutral". We will need to investigate if this seems to be correct.
-- One of the reason for the above remark is that we preprocessed the quotes to easily detect mentions of policians. Namely, we made all the quotes lowercase, scrapping some information that could be used by the sentiment algorithm.
+- Preliminary analyses show that most quotes are classified as "neutral". However, for this we had preprocessed the quotes to easily detect mentions of policians by making all the quotes lowercase. This removes some information that could be used by the sentiment algorithm.
 
 ## Proposed timeline
 
 - Sentiment analysis on quotes
-    - Calculate sentiment for each quote
-    - Descriptive analysis (trends, plots, statistics, etc.)
-    - Analyse around key events mentioned earlier. Presidential elections, midterms, etc.
-    - Regression or similar on the time-series
-    - Compare republicans to democrats
-    - Who are the most and least aggressive speakers
+    - Calculate sentiments
+    - Descriptive analysis (plots, statistics, etc.)
+    - Analyse around key events. Presidential elections, midterms, etc.
+    - Regression on the time-series
+    - Compare parties and people
     - Possibly try another sentiment measure and compare with previous results.
         - Are the results stable across measures
         - Is irony influencing the results
-- Make webpage with these results and ensure this is on track before continuing
+- Make webpage with sentiment analysis results
 - Analyse frequently used terms
 - Lexical analysis on quotes
     - Find measure for lexical richness
     - Calculate lexical richness for each quote
-    - Descriptive analysis (trends, plots, statistics, etc.)
-    - Regression or similar on the time-series
-    - Compare republicans to democrats
+    - Descriptive analysis (plots, statistics, etc.)
+    - Regression
+    - Compare parties and people
 
 ## Organization within the team
 
-(Deadline: Dec 17)
 Task - Person responsible - Deadline (23:59 on the date)
 
-- Calculate sentiment for quotes resulting in two time-series for initial sentiment measure - Daryna - November 18
+- Calculate sentiment for quotes - Daryna - November 18
 - Descriptive analysis of sentiment - Andreas - November 18
-- Analyse around key events - René - November 21
-- Compare republicans to democrats - Olivier - November 21
+- Analyse at key events - René - November 21
+- Compare parties - Olivier - November 21
 - Find least and most aggressive speakers - Olivier - November 21
-- Regression on time-series - Andreas - November 21
+- Regression - Andreas - November 21
 - Try another sentiment measure - Daryna - November 24
 - Analyse results with new measure - René - November 28
 - Starting webpage with story - Olivier - November 28
 - Inserting results from sentiment analysis - All w.r.t. their previous area of responsibility - December 8
-- Analyse frequently used terms and inserting the results - any if time permits - December 12
-- Lexical richness and inserting results - any if time permits - December 12
+- Analyse frequently used terms and inserting the results - anyone, if time permits - December 12
+- Lexical richness and inserting results - anyone, if time permits - December 12
 
 ## Questions for TAs 
 
