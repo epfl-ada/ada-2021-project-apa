@@ -1,7 +1,0 @@
-TODO :
-EDA
-Look for best sentiment analysis
-Try advanced SA to take care of irony, or look for patterns and ways to manually take care of it
-Check issues on some mentions (Trump family mentionned instead of Donald..)
-Quotes preprocessing ?
-Compare the SA/cleavage scores and distributions, statistical test on evolution, increase ?
