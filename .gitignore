@@ -14,6 +14,7 @@ data/*.json.bz2
 data/pkl
 data/*.tar.gz
 data/csv/final_subset.csv
+data/events/*.zip
 
 old_code/data
 logistic_thinkers_EDA.ipynb
