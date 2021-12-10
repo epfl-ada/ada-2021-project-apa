@@ -8,6 +8,7 @@ speaker_attributes.parquet
 schema_speaker_attributes
 quotes-2019.json.bz2
 politicians_github.csv
+small.json
 
 data/*.parquet
 data/*.json.bz2
@@ -24,3 +25,4 @@ logistic_thinkers_EDA.txt
 
 
 tempCodeRunnerFile.python
+final_subset_flaired.pkl
