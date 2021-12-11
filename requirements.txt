@@ -9,3 +9,6 @@ pyarrow
 pandarallel
 ipywidgets
 nltk
+textblob
+flair
+statsmodels

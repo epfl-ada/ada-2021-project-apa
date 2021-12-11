@@ -2,6 +2,7 @@
 .vscode
 .env
 venv
+venvwsl
 .ipynb_checkpoints
 quotes-2019-nytimes.json.bz2
 speaker_attributes.parquet
