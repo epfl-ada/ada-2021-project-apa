@@ -1,4 +1,4 @@
-,date,description,short_desc
+,date,desc,short_desc
 0,2015-03-25,"Indiana Governor Mike Pence signs Indiana SB 101 into law, prompting a national debate over religious freedom and LGBT rights. After a week of public outcry, the law is modified and similar bills in Arkansas, North Carolina, Georgia, and North Dakota fail to pass their state legislatures.",LGBT debate
 1,2015-04-11," President Barack Obama and Cuban President Raúl Castro discuss historic proposed normalizations to Cuba-United States relations at the 7th Summit of the Americas in Panama City, Panama.",US-Cuba relations start again
 2,2015-04-01,start of the 2016 presidential campaign,2016 presidential campaign
@@ -62,10 +62,4 @@
 60,2020-01-14,"The seventh Democratic presidential debate is held in Des Moines, Iowa. Six candidates participate.",Seventh Democratic debate
 61,2020-01-16,The impeachment trial of President Donald Trump begins in the U.S. Senate.,First impeachment trial begins
 62,2020-01-21,COVID-19 pandemic: The first case of COVID-19 in the United States is confirmed by the Centers for Disease Control and Prevention (CDC).,First case of COVID-19 discovered in the US
-63,2020-02-05,The impeachment trial of President Donald Trump concludes with the Senate voting 52–48 to acquit on the first article of impeachment and 53–47 on the second charge. Utah Senator Mitt Romney becomes the first ever senator to vote to remove a president of their own political party.,Trumps acquitted
-64,2020-04-22,COVID-19 pandemic: President Trump signs an immigration executive order halting the issuance of certain green cards for 60 days.,Harder immigration policy
-65,2020-05-25,"Minneapolis police officer Derek Chauvin murders George Floyd, 46, by kneeling on his neck, as three other officers watch. Video of the incident goes viral and the four officers are subsequently fired.",Start of George Floyd protests
-66,2020-09-26,President Trump nominates Seventh Circuit Court of Appeals Judge Amy Coney Barrett to fill the vacant Supreme Court seat following the death of Judge Ruth Bader Ginsburg.,Trump nominates new Federal judge
-67,2020-11-03,presidential election,2020 president election
-68,2020-11-04,The United States formally withdraws from the Paris Agreement.,US officially withdraw from Paris Agreement
-69,2020-11-07,Joe biden won the election,Joe Biden victory
+63,2020-02-05,The impeachment trial of President Donald Trump concludes with the Senate voting 52–48 to acquit on the first article of impeachment and 53–47 on the second charge. Utah Senator Mitt Romney becomes the first ever senator to vote to remove a president of their own political party.,Trump acquitted
