@@ -54,4 +54,6 @@ Using the computed scores, we then analyze its evolution accross time for the tw
 - Andreas: 
 - Daryna:
 - Olivier: downsize original quotebank dataset with relevant quotes, create events dataset, analyze sentiment aggressivity, redo README for P3, put personal part on website  
-- René:
+- René: Implemented some libraries for sentiment analysis, initial sentiment analysis, most used words, key event analysis
+
+
