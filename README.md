@@ -47,8 +47,8 @@ The following figure illustrates the data pipeline:
 ![Data pipeline](figures/data_pipe.png)
 
 Remarks:
-- We extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician or when the target party is mentioned (republican(s) by a democrat and covnersely). 
-- A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). For now, we decided to drop duplicated names and their quotes. This could be changed in the future.
+- We extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician or when the target party is mentioned (republican(s) by a democrat and conversely). 
+- A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). We decided to drop duplicated names and their quotes. 
 
 ### 2. Political cleavage analysis
 _The relevant notebook for this part is called **sentiment_eda.ipynb**._  
@@ -57,9 +57,9 @@ From the above dataset, we want to analyze the political cleavage accross time. 
 Using the computed scores, we then analyze its evolution accross time for the two parties and answer the different research questions that are mentioned above.
 
 ## Members contribution
-- Andreas: initial descriptive statistics and plotting, regression, trend analysis, spectral analysis, general code improvement, adding personal parts to website
-- Daryna:
-- Olivier: downsize original quotebank dataset with relevant quotes, create events dataset, analyze sentiment aggressivity, redo README for P3, put personal part on website  
+- Andreas:  initial descriptive statistics and plotting, regression, trend analysis, spectral analysis, general code improvement, adding personal parts to website
+- Daryna: topics detection using Latent Dirichlet Allocation (LDA), sentiment analysis of the main detected topics, adding description to website
+- Olivier: Downsized original quotebank dataset with relevant quotes, created events dataset, analyzed sentiment aggressivity, redid README for P3, website design
 - René: Implemented some libraries for sentiment analysis, initial sentiment analysis, most used words, key event analysis
 
 
