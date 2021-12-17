@@ -57,8 +57,8 @@ From the above dataset, we want to analyze the political cleavage accross time. 
 Using the computed scores, we then analyze its evolution accross time for the two parties and answer the different research questions that are mentioned above.
 
 ## Members contribution
-- Andreas: 
-- Daryna:
+- Andreas:  initial descriptive statistics and plotting, regression, trend analysis, spectral analysis, general code improvement, adding personal parts to website
+- Daryna: topics detection using Latent Dirichlet Allocation (LDA), sentiment analysis of the main detected topics, adding description to website
 - Olivier: Downsized original quotebank dataset with relevant quotes, created events dataset, analyzed sentiment aggressivity, redid README for P3, website design
 - René: Implemented some libraries for sentiment analysis, initial sentiment analysis, most used words, key event analysis
 
