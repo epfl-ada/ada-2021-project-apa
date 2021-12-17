@@ -57,7 +57,7 @@ From the above dataset, we want to analyze the political cleavage accross time. 
 Using the computed scores, we then analyze its evolution accross time for the two parties and answer the different research questions that are mentioned above.
 
 ## Members contribution
-- Andreas: 
+- Andreas: initial descriptive statistics and plotting, regression, trend analysis, spectral analysis, general code improvement, adding personal parts to website
 - Daryna:
 - Olivier: downsize original quotebank dataset with relevant quotes, create events dataset, analyze sentiment aggressivity, redo README for P3, put personal part on website  
 - René: Implemented some libraries for sentiment analysis, initial sentiment analysis, most used words, key event analysis
