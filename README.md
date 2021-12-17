@@ -24,7 +24,13 @@ We've extracted the members of the US congress from the [Biographical Directory 
 We decided to split our work in more than one notebook to not clutter the main analysis part:
 - `data_extraction.ipynb` is a remnant from P2. This notebook contains the data pipeline, how we got the data that we work with;
 - `events_dataset.ipynb` explains different approaches followed to gather and create our national events dataset;
-- `sentiment_analysis.ipynb` contains the sentiment score computation and the further analysis.
+- `sentiment_eda.ipynb` contains the code for computing the sentiment. This notebook also contain the main analysis of the sentiment. Firstly through a describe statistics and plots, then through sentiment and topic analyses. 
+
+The _data_ directory contain data files used for the analysis. This includes the processed quotebank data, event data etc.
+
+The _figures_ directory contains figures used for the data story.
+
+_requirements.txt_ contains a list of Python modules (and versions) needed to run the notebooks.
 
 ## Methods
 
