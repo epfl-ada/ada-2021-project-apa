@@ -48,7 +48,7 @@ The following figure illustrates the data pipeline:
 
 Remarks:
 - We extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician or when the target party is mentioned (republican(s) by a democrat and covnersely). 
-- A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). For now, we decided to drop duplicated names and their quotes. This could be changed in the future.
+- A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). We decided to drop duplicated names and their quotes. 
 
 ### 2. Political cleavage analysis
 _The relevant notebook for this part is called **sentiment_eda.ipynb**._  
