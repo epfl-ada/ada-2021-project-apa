@@ -47,7 +47,7 @@ The following figure illustrates the data pipeline:
 ![Data pipeline](figures/data_pipe.png)
 
 Remarks:
-- We extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician or when the target party is mentioned (republican(s) by a democrat and covnersely). 
+- We extract quotes by detecting when the speaker is the exact name (Name + Family Name) of a politician or when the target party is mentioned (republican(s) by a democrat and conversely). 
 - A few names appear several times in the congress members list for various reasons. For instance, Donald Payne refer to two different politicians (Donald M. Payne and Donald Payne Jr. - father and son). We decided to drop duplicated names and their quotes. 
 
 ### 2. Political cleavage analysis
@@ -59,7 +59,7 @@ Using the computed scores, we then analyze its evolution accross time for the tw
 ## Members contribution
 - Andreas: 
 - Daryna:
-- Olivier: downsize original quotebank dataset with relevant quotes, create events dataset, analyze sentiment aggressivity, redo README for P3, put personal part on website  
+- Olivier: Downsized original quotebank dataset with relevant quotes, created events dataset, analyzed sentiment aggressivity, redid README for P3, website design
 - René: Implemented some libraries for sentiment analysis, initial sentiment analysis, most used words, key event analysis
 
 
