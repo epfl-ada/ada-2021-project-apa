@@ -2,19 +2,6 @@
 
 [Data story](https://andreaslp.github.io/APA-DataStory/)
 
-## Repository layout
-
-The _data_ directory contain data files used for the analysis. This includes the processed quotebank data, event data etc.
-
-The _figures_ directory contains figures used for the data story
-
-_requirements.txt_ contains a list of Python modules (and versions) needed to run the notebooks
-
-Notebooks:
-- *sentiment_eda.ipynb*: Contains the code for computing the sentiment. This notebook also contain the main analysis of the sentiment. Firstly through a describe statistics and plots, then through sentiment and topic analyses. 
-- *temp_datastory.ipynb*: Contains code for statistics and plots presented in the data story.
-
-
 ## Abstract 
 
 Donald Trump's election in 2017 was only one illustration of the Left-Right political cleavage in the United States of America, USA. Leveraging the Quotebank dataset, the project idea would be to measure the evolution of this cleavage across time, and especially focus on how major elections i.e. the presidential election or midterms affect the cleavage short-term. We're expecting this cleavage to increase, specially around events such as the presidential election or some specific events like the outbreak of the corona epidemic (2020), [major mass shootings](https://en.wikipedia.org/w/index.php?title=List_of_mass_shootings_in_the_United_States&oldid=1054289389), the first impeachment of Trump (2019), the riot in Charlottesville (2017). We are not looking at events from 2021, and hence, the January 6th riots and Joe Biden taking office are omitted.
@@ -37,7 +24,13 @@ We've extracted the members of the US congress from the [Biographical Directory 
 We decided to split our work in more than one notebook to not clutter the main analysis part:
 - `data_extraction.ipynb` is a remnant from P2. This notebook contains the data pipeline, how we got the data that we work with;
 - `events_dataset.ipynb` explains different approaches followed to gather and create our national events dataset;
-- `sentiment_analysis.ipynb` contains the sentiment score computation and the further analysis.
+- `sentiment_eda.ipynb` contains the code for computing the sentiment. This notebook also contain the main analysis of the sentiment. Firstly through a describe statistics and plots, then through sentiment and topic analyses. 
+
+The _data_ directory contain data files used for the analysis. This includes the processed quotebank data, event data etc.
+
+The _figures_ directory contains figures used for the data story.
+
+_requirements.txt_ contains a list of Python modules (and versions) needed to run the notebooks.
 
 ## Methods
 
